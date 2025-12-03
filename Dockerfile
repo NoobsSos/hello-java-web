@@ -1,9 +1,9 @@
-FROM eclipse-temurin:17-jdk
+FROM tomcat:10.1.12-jdk17
 
-WORKDIR /app
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
 
-COPY target/java-hello-world-webapp.war app.war
+COPY target/java-hello-world-webapp.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8085
 
-ENTRYPOINT ["java", "-jar", "/app/app.war", "--server.port=8085"]
+CMD ["catalina.sh", "run"]
